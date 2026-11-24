@@ -794,6 +794,7 @@ if (ENABLE_COOP_THREADS)
   # `--wrap=malloc` only redirects references linked into the test itself, so
   # it can't fail allocations made inside `libc.so`.
   add_wasilibc_test(coop_futex_wait_enomem.c NOSHARED LDFLAGS -Wl,--wrap=malloc)
+  add_wasilibc_test(coop_futex_wait_einval_alloc.c NOSHARED LDFLAGS -Wl,--wrap=malloc)
   add_wasilibc_test(coop_timedwaits.c)
   add_wasilibc_test(coop_cond_timedwait_return.c)
   add_wasilibc_test(coop_timedwait_abs_deadline.c)

@@ -371,6 +371,8 @@ int __wasilibc_futex_wait(volatile int *addr, int val, clockid_t clk,
       return -EINVAL;
     if (at->tv_nsec < 0)
       return -EINVAL;
+    if (!(flags & __WASILIBC_FUTEX_TIMESPEC_ABSOLUTE) && at->tv_sec < 0)
+      return -EINVAL;
   }
 
   if (*addr != val)
@@ -384,8 +386,6 @@ int __wasilibc_futex_wait(volatile int *addr, int val, clockid_t clk,
 
   int rc = 0;
   if (at) {
-    if (!(flags & __WASILIBC_FUTEX_TIMESPEC_ABSOLUTE) && at->tv_sec < 0)
-        return -EINVAL;
     rc = wait_timeout(list, clk, at, flags);
   } else {
     wait_indefinitely(list);
