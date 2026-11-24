@@ -378,7 +378,7 @@ int __wasilibc_futex_wait(volatile int *addr, int val, clockid_t clk,
 
   struct __futex_waitlist *waiters = find_futex_entry(addr, true);
   if (!waiters)
-    return ENOMEM;
+    return -ENOMEM;
   waiters->refcnt++;
   struct __waitlist_node **list = &waiters->list;
 
