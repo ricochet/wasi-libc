@@ -66,7 +66,7 @@ static void stdin3_free(void *data) {
     terminal_input_terminal_input_drop_own(stdio->terminal_in);
   wasip3_read_state_close(&stdio->input);
   if (stdio->input_result)
-    stdin_stream_u8_drop_readable(stdio->input_result);
+    stdin_future_result_void_error_code_drop_readable(stdio->input_result);
   free(stdio);
 }
 
